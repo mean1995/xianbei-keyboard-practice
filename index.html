@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>仙贝的键盘练习</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header class="app-header">
+        <h1>仙贝的键盘练习</h1>
+      </header>
+
+      <main>
+        <section id="home-view" class="home-placeholder app-view" aria-labelledby="home-title">
+          <div class="welcome-panel">
+            <h2 id="home-title">仙贝，今天也来练一会儿吧</h2>
+            <p>练习前，请先关闭中文输入法，切换到英文输入。</p>
+
+            <div id="storage-warning" class="storage-warning" hidden>
+              本地保存暂时不可用，练习仍然可以继续。
+            </div>
+
+            <div class="progress-summary" aria-live="polite">
+              <p id="home-progress-title" class="progress-summary__title">仙贝已经完成：</p>
+              <p id="home-intro-progress">入门了解 0 / 27</p>
+              <p id="home-practice-progress">入门练习 0 / 27</p>
+              <p id="home-random-progress">随机练习 已完成 0 篇</p>
+              <p id="home-last-practice" class="progress-summary__last" hidden></p>
+            </div>
+          </div>
+
+          <nav class="home-nav" aria-label="基础导航">
+            <button type="button" id="start-intro-button">入门了解</button>
+            <button type="button" id="start-practice-button">入门练习</button>
+            <button type="button" id="start-random-button">随机练习</button>
+          </nav>
+
+          <div class="home-tools">
+            <button type="button" id="clear-progress-button">清除本地进度</button>
+            <span id="app-version" class="app-version">版本：RC1.0</span>
+          </div>
+        </section>
+
+        <section id="intro-view" class="lesson-panel app-view" aria-labelledby="intro-course-title" hidden>
+          <div id="intro-course-view" class="lesson-step">
+            <div class="section-heading">
+              <p class="section-kicker">入门了解</p>
+              <h2 id="intro-course-title">选择认识课程</h2>
+              <p>先从两个键开始，慢慢认识整个基准键。</p>
+              <p class="course-hint">建议按顺序完成课程。</p>
+            </div>
+
+            <div id="intro-course-list" class="course-list" aria-label="入门了解课程"></div>
+
+            <div class="module-actions">
+              <button type="button" id="intro-course-home-button" class="secondary-button">返回首页</button>
+            </div>
+          </div>
+
+          <div id="intro-case-guide-view" class="lesson-step" hidden>
+            <div class="section-heading">
+              <p class="section-kicker">入门了解 · 第 27 课</p>
+              <h2>认识大小写</h2>
+              <p>先看一看小写、大写、Shift 和 Caps Lock 的区别。</p>
+            </div>
+
+            <div class="case-guide" aria-label="大小写讲解">
+              <section class="case-guide-card">
+                <h3>小写字母</h3>
+                <p>直接按字母键，通常会输入小写字母。</p>
+                <p class="case-example">例如：按 a，输入 a。</p>
+              </section>
+
+              <section class="case-guide-card">
+                <h3>大写字母</h3>
+                <p>按住 Shift，再按字母，可以输入大写字母。</p>
+                <p class="case-example">例如：按住 Shift，再按 a，输入 A。</p>
+              </section>
+
+              <section class="case-guide-card">
+                <h3>Caps Lock</h3>
+                <p>Caps Lock 像一个开关。</p>
+                <p>打开以后，输入字母会变成大写。</p>
+                <p>再按一次 Caps Lock，就会回到小写。</p>
+                <div class="case-guide-key case-guide-key--caps"><strong>Caps Lock</strong><span>大小写开关</span></div>
+              </section>
+
+              <section class="case-guide-card">
+                <h3>练习提醒</h3>
+                <p>练习时，我们先用 Shift 输入大写字母。</p>
+                <p>Caps Lock 先认识，不作为主要练习方式。</p>
+              </section>
+            </div>
+
+            <div class="case-target-preview" aria-label="本课练习字符">
+              <div class="case-guide-key"><strong>a</strong><span>小写</span></div>
+              <div class="case-guide-key"><strong>A</strong><span>大写</span></div>
+              <div class="case-guide-key"><strong>f</strong><span>小写</span></div>
+              <div class="case-guide-key"><strong>F</strong><span>大写</span></div>
+              <div class="case-guide-key"><strong>j</strong><span>小写</span></div>
+              <div class="case-guide-key"><strong>J</strong><span>大写</span></div>
+            </div>
+
+            <div class="module-actions">
+              <button type="button" id="intro-case-guide-start-button">我明白了，开始练习</button>
+              <button type="button" id="intro-case-guide-back-button" class="secondary-button">返回课程选择</button>
+            </div>
+          </div>
+
+          <div id="intro-drill-view" class="lesson-step" hidden>
+            <div class="section-heading">
+              <p id="intro-drill-kicker" class="section-kicker">入门了解</p>
+              <h2 id="intro-drill-title">认识基准键</h2>
+              <p>用鼠标点击屏幕上的键，看看基准键在哪里。</p>
+            </div>
+
+            <div class="task-card" aria-live="polite">
+              <p id="intro-status" class="task-status">准备开始。</p>
+              <p id="intro-prompt" class="task-prompt">准备认识基准键。</p>
+            </div>
+
+            <div id="keyboard-root"></div>
+
+            <div id="intro-complete-actions" class="module-actions" hidden>
+              <button type="button" id="intro-restart-button">再来一轮</button>
+              <button type="button" id="intro-course-button-complete" class="secondary-button">返回课程选择</button>
+              <button type="button" id="intro-home-button-complete" class="secondary-button">返回首页</button>
+            </div>
+
+            <div id="intro-footer-actions" class="module-actions">
+              <button type="button" id="intro-home-button" class="secondary-button">返回首页</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="practice-view" class="lesson-panel app-view" aria-labelledby="practice-course-title" hidden>
+          <div id="practice-course-view" class="lesson-step">
+            <div class="section-heading">
+              <p class="section-kicker">入门练习</p>
+              <h2 id="practice-course-title">选择练习课程</h2>
+              <p>先把手放好，再一步一步练习。</p>
+              <p class="course-hint">建议按顺序完成课程。</p>
+            </div>
+
+            <div id="practice-course-list" class="course-list" aria-label="入门练习课程"></div>
+
+            <div class="module-actions">
+              <button type="button" id="practice-course-home-button" class="secondary-button">返回首页</button>
+            </div>
+          </div>
+
+          <div id="practice-case-guide-view" class="lesson-step" hidden>
+            <div class="section-heading">
+              <p class="section-kicker">入门练习 · 第 27 课</p>
+              <h2>认识大小写</h2>
+              <p>先看一看小写、大写、Shift 和 Caps Lock 的区别。</p>
+            </div>
+
+            <div class="case-guide" aria-label="大小写讲解">
+              <section class="case-guide-card">
+                <h3>小写字母</h3>
+                <p>直接按字母键，通常会输入小写字母。</p>
+                <p class="case-example">例如：按 a，输入 a。</p>
+              </section>
+
+              <section class="case-guide-card">
+                <h3>大写字母</h3>
+                <p>按住 Shift，再按字母，可以输入大写字母。</p>
+                <p class="case-example">例如：按住 Shift，再按 a，输入 A。</p>
+              </section>
+
+              <section class="case-guide-card">
+                <h3>Caps Lock</h3>
+                <p>Caps Lock 像一个开关。</p>
+                <p>打开以后，输入字母会变成大写。</p>
+                <p>再按一次 Caps Lock，就会回到小写。</p>
+                <div class="case-guide-key case-guide-key--caps"><strong>Caps Lock</strong><span>大小写开关</span></div>
+              </section>
+
+              <section class="case-guide-card">
+                <h3>练习提醒</h3>
+                <p>练习时，我们先用 Shift 输入大写字母。</p>
+                <p>Caps Lock 先认识，不作为主要练习方式。</p>
+              </section>
+            </div>
+
+            <div class="case-target-preview" aria-label="本课练习字符">
+              <div class="case-guide-key"><strong>a</strong><span>小写</span></div>
+              <div class="case-guide-key"><strong>A</strong><span>大写</span></div>
+              <div class="case-guide-key"><strong>f</strong><span>小写</span></div>
+              <div class="case-guide-key"><strong>F</strong><span>大写</span></div>
+              <div class="case-guide-key"><strong>j</strong><span>小写</span></div>
+              <div class="case-guide-key"><strong>J</strong><span>大写</span></div>
+            </div>
+
+            <div class="module-actions">
+              <button type="button" id="practice-case-guide-start-button">我明白了，开始练习</button>
+              <button type="button" id="practice-case-guide-back-button" class="secondary-button">返回课程选择</button>
+            </div>
+          </div>
+
+          <div id="practice-ready-view" class="lesson-step" hidden>
+            <div class="section-heading">
+              <p id="practice-ready-kicker" class="section-kicker">入门练习</p>
+              <h2 id="practice-title">先把手放在基准键上</h2>
+              <p>按完一个键以后，手指要回到原来的位置。</p>
+              <p id="practice-ready-number-reminder" class="ready-reminder" hidden>
+                数字键比较远，按完以后，手指要回到基准键。
+              </p>
+              <p id="practice-ready-punctuation-reminder" class="ready-reminder" hidden>
+                标点键在右手边比较多，按完以后，手指要回到基准键。
+              </p>
+              <p id="practice-ready-shift-reminder" class="ready-reminder" hidden>
+                这一课要用到 Shift。请按住 Shift，再按目标键。按完以后，手指回到基准键。
+              </p>
+              <p id="practice-ready-case-reminder" class="ready-reminder" hidden>
+                这一课要分清大小写。大写先用 Shift 输入。
+              </p>
+            </div>
+
+            <div class="home-position-guide" aria-label="基准位示意区">
+              <div class="guide-group">
+                <h3>左手放在 A S D F 上</h3>
+                <div class="guide-keys">
+                  <div class="guide-key"><strong>A</strong><span>小指</span></div>
+                  <div class="guide-key"><strong>S</strong><span>无名指</span></div>
+                  <div class="guide-key"><strong>D</strong><span>中指</span></div>
+                  <div class="guide-key"><strong>F</strong><span>食指</span></div>
+                </div>
+              </div>
+
+              <div class="guide-group">
+                <h3>右手放在 J K L ; 上</h3>
+                <div class="guide-keys">
+                  <div class="guide-key"><strong>J</strong><span>食指</span></div>
+                  <div class="guide-key"><strong>K</strong><span>中指</span></div>
+                  <div class="guide-key"><strong>L</strong><span>无名指</span></div>
+                  <div class="guide-key"><strong>;</strong><span>小指</span></div>
+                </div>
+              </div>
+
+              <div class="guide-group guide-group--space">
+                <h3>大拇指轻轻放在 Space 上</h3>
+                <div class="guide-keys">
+                  <div class="guide-key guide-key--space"><strong>Space</strong><span>大拇指</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="module-actions">
+              <button type="button" id="practice-ready-button">我放好了</button>
+              <button type="button" id="practice-ready-home-button" class="secondary-button">返回首页</button>
+            </div>
+          </div>
+
+          <div id="practice-drill-view" class="lesson-step" hidden>
+            <div class="section-heading">
+              <p id="practice-drill-kicker" class="section-kicker">入门练习</p>
+              <h2 id="practice-drill-title">练习基准键</h2>
+              <p>看清提示，再用正确的手指按下。</p>
+            </div>
+
+            <div class="task-card" aria-live="polite">
+              <p id="practice-status" class="task-status">准备开始。</p>
+              <p id="practice-prompt" class="task-prompt">准备练习基准键。</p>
+            </div>
+
+            <div id="practice-keyboard-root"></div>
+
+            <p class="practice-reminder">按完以后，手指回到基准键。</p>
+
+            <div id="practice-complete-actions" class="module-actions" hidden>
+              <button type="button" id="practice-restart-button">再来一轮</button>
+              <button type="button" id="practice-course-button-complete" class="secondary-button">返回课程选择</button>
+              <button type="button" id="practice-home-button-complete" class="secondary-button">返回首页</button>
+            </div>
+
+            <div id="practice-footer-actions" class="module-actions">
+              <button type="button" id="practice-home-button" class="secondary-button">返回首页</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="random-view" class="lesson-panel app-view" aria-labelledby="random-title" hidden>
+          <div id="random-select-view" class="lesson-step">
+            <div class="section-heading">
+              <p class="section-kicker">随机练习</p>
+              <h2 id="random-title">选择练习类型</h2>
+              <p>练习前，请确认已经关闭中文输入法，切换到英文输入。</p>
+            </div>
+
+            <div class="random-choice-group">
+              <h3>自由随机练习</h3>
+              <p>程序会随机生成一组字符，完成后按 Enter 继续下一组。</p>
+              <div id="random-mode-list" class="text-card-list" aria-label="自由随机练习"></div>
+            </div>
+
+            <div class="random-choice-group">
+              <h3>短文练习</h3>
+              <p>按行练习短句，完成每一行后按 Enter 继续。</p>
+              <div id="text-card-list" class="text-card-list" aria-label="短文练习"></div>
+            </div>
+
+            <div class="module-actions">
+              <button type="button" id="random-select-home-button" class="secondary-button">返回首页</button>
+            </div>
+          </div>
+
+          <div id="random-drill-view" class="lesson-step" hidden>
+            <div class="section-heading">
+              <p class="section-kicker">随机练习</p>
+              <h2 id="random-drill-title">练习文本</h2>
+              <p>练习前，请确认已经关闭中文输入法，切换到英文输入。</p>
+            </div>
+
+            <div class="line-progress">
+              <p id="random-line-counter">第 1 行 / 共 1 行</p>
+            </div>
+
+            <div class="typing-target" aria-live="polite">
+              <div id="typing-target-line" class="typing-target__line"></div>
+            </div>
+
+            <label class="typing-input-label" for="typing-input">在这里输入这一行</label>
+            <input id="typing-input" class="typing-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+            <div class="task-card" aria-live="polite">
+              <p id="typing-status" class="task-status">看清这一行，再开始输入。</p>
+              <p id="typing-prompt" class="task-prompt">输入完全正确后，再进入下一行。</p>
+            </div>
+
+            <div id="random-complete-actions" class="module-actions" hidden>
+              <button type="button" id="random-restart-button">再练一篇</button>
+              <button type="button" id="random-other-text-button" class="secondary-button">返回随机练习</button>
+              <button type="button" id="random-home-button-complete" class="secondary-button">返回首页</button>
+            </div>
+
+            <div id="random-footer-actions" class="module-actions">
+              <button type="button" id="random-back-to-list-button" class="secondary-button">返回随机练习</button>
+              <button type="button" id="random-home-button" class="secondary-button">返回首页</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="data/keymap-data.js"></script>
+    <script src="data/lessons-data.js"></script>
+    <script src="data/texts-data.js"></script>
+    <script src="js/keyboard.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
